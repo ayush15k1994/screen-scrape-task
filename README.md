@@ -16,7 +16,7 @@ The console command which print out rooms and their starting prices from Liverpo
  - Command supports multiple writers (which implements **WriterInterface**) to easy implement new output writing strategies (for example: writing output to file)
  - It's easy to use another crawler library. It only must implement **CrawlerInterface**
 
-##Instalation
+##Installation
 
 Clone repository and get app.php executable:
 
