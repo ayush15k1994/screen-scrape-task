@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: mateuszsojda
  * Date: 27/11/14
- * Time: 09:04
+ * Time: 09:58
  */
 
 namespace Scraper\Writer;
@@ -11,10 +11,10 @@ namespace Scraper\Writer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Serializer;
-use Symfony\Component\Console\Output\OutputInterface;
 use JMS\Serializer\SerializerBuilder;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class JSONWriter implements WriterInterface
+class XMLWriter implements WriterInterface
 {
     /**
      * @var OutputInterface
@@ -34,7 +34,7 @@ class JSONWriter implements WriterInterface
 
     public function write(ArrayCollection $data)
     {
-        $jsonContent = $this->writer->serialize($data, 'json');
-        $this->output->writeln($jsonContent);
+        $xmlContent = $this->writer->serialize($data, 'xml');
+        $this->output->writeln($xmlContent);
     }
 }
