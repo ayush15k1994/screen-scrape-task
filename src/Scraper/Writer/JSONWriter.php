@@ -11,6 +11,7 @@ namespace Scraper\Writer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Console\Output\OutputInterface;
+use JMS\Serializer\SerializerBuilder;
 
 class JSONWriter implements WriterInterface
 {
@@ -19,13 +20,17 @@ class JSONWriter implements WriterInterface
      */
     private $output;
 
+    private $writer;
+
     public function __construct(OutputInterface $output)
     {
         $this->output = $output;
+        $this->writer = SerializerBuilder::create()->build();
     }
 
     public function write(ArrayCollection $data)
     {
-        // TODO: Implement write() method.
+        $jsonContent = $this->writer->serialize($data, 'json');
+        $this->output->writeln($jsonContent);
     }
 }
