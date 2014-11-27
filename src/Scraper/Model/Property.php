@@ -64,7 +64,7 @@ class Property
      */
     public function removeRoom(Room $room)
     {
-        $this->rooms->remove($room);
+        $this->rooms->removeElement($room);
 
         return $this;
     }
