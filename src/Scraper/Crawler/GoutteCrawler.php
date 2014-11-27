@@ -42,7 +42,6 @@ class GoutteCrawler implements CrawlerInterface
 
             $crawler->filter("#rooms .rooms__list .rooms__list__menu__item")->each(function ($node) use ($property) {
                 $room = new Room();
-
                 $roomType = $node->filter(".rooms__list__menu__link")->text();
                 if (preg_match('/\£(\d+(?:\.\d{1,2})?)/', $roomType, $price)) {
                     $room->setStartingPrice($price[1]);
