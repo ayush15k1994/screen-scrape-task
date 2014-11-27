@@ -10,6 +10,8 @@ namespace Scraper\Writer;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Scraper\Model\Property;
+use Scraper\Model\Room;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CSVWriter implements WriterInterface
@@ -26,6 +28,25 @@ class CSVWriter implements WriterInterface
 
     public function write(ArrayCollection $data)
     {
-        // TODO: Implement write() method.
+        $handle = fopen('php://temp', 'w');
+        fputcsv($handle, array('Property', 'Room type', 'Starting price'));
+
+        foreach ($data as $property) {
+            /** @var Property $property */
+            if ($property->getRooms()->count()) {
+                foreach ($property->getRooms() as $room) {
+                    /** @var Room $room */
+                    fputcsv($handle, array($property->getName(), $room->getRoomType(), $room->getStartingPrice()));
+                }
+            } else {
+                fputcsv($handle, array($property->getName(), '', ''));
+            }
+        }
+
+        rewind($handle);
+        $csv = stream_get_contents($handle);
+        fclose($handle);
+
+        $this->output->writeln($csv);
     }
 }
